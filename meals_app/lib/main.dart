@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/views/favourites.dart';
+import 'package:meals_app/views/home_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         primaryColor: Colors.white,
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           bodyText2: TextStyle(color: Colors.white),
         ),
         useMaterial3: true,
       ),
-      home: Favourites(),
+      home: const HomePage(),
     );
   }
 }
