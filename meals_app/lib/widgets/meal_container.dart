@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meals_app/models/favourites_notifier.dart';
 import 'package:meals_app/models/meal.dart';
 import 'package:meals_app/views/meal_details_view.dart';
 
-class MealContainer extends StatelessWidget {
+class MealContainer extends ConsumerWidget {
   final Meal meal;
-  const MealContainer({
-    super.key,
-    required this.meal,
-  });
+
+  const MealContainer({Key? key, required this.meal}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final favouritesList = ref.watch(favouritesProvider);
     return InkWell(
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => RecipeDetailScreen(meal: meal),
+            builder: (context) => MealDetailsView(meal: meal),
           ),
         );
       },
@@ -118,16 +119,22 @@ class MealContainer extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               IconButton(
-                                icon: const Icon(
-                                  // isFavourite ?
-                                  Icons.favorite,
-                                  // : Icons.favorite_border,
+                                icon: Icon(
+                                  favouritesList.contains(meal)
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
                                   color: Colors.red,
                                 ),
                                 onPressed: () {
-                                  // setState(() {
-                                  //   isFavourite = !isFavourite;
-                                  // });
+                                  if (favouritesList.contains(meal)) {
+                                    ref
+                                        .read(favouritesProvider.notifier)
+                                        .remove(meal);
+                                  } else {
+                                    ref
+                                        .read(favouritesProvider.notifier)
+                                        .add(meal);
+                                  }
                                 },
                               ),
                             ],

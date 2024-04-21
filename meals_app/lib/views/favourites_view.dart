@@ -1,117 +1,40 @@
 import 'package:flutter/material.dart';
-// import 'package:meals_app/views/meal_details_view.dart';
-import 'package:meals_app/widgets/recipe_card.dart';
-import 'package:meals_app/widgets/recipes.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meals_app/data/dummy_data.dart';
+import 'package:meals_app/models/category.dart';
+import 'package:meals_app/models/favourites_notifier.dart';
+import 'package:meals_app/widgets/bottom_navigation_bar.dart';
+import 'package:meals_app/widgets/custom_drawer.dart';
+import 'package:meals_app/widgets/meal_container.dart';
 
-class Favourites extends StatefulWidget {
-  const Favourites({super.key});
-
-  @override
-  State<Favourites> createState() => _FavouritesState();
-}
-
-class _FavouritesState extends State<Favourites> {
-  late List<RecipeCard> favouritesList = recipes;
+class Favourites extends ConsumerWidget {
+  const Favourites({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Use WidgetRef instead of ScopedReader
+    final meals = ref.watch(favouritesProvider);
+
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 176, 173, 173),
       appBar: AppBar(
-        elevation: 10,
-        title: const Center(
-          child: Text('Your Favourites'),
+        foregroundColor: Colors.white,
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 52, 49, 49),
+        title: Text(
+          "Favourites",
+          style: const TextStyle(
+            fontSize: 27,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(''),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: meals.length,
+        itemBuilder: (context, index) => MealContainer(meal: meals[index]),
       ),
-      // body: favouritesList.isEmpty
-      //     ? const Center(
-      //         child: Text(
-      //           'There are no favorites yet!',
-      //           style: TextStyle(
-      //             color: Colors.black,
-      //             fontSize: 30,
-      //           ),
-      //         ),
-      //       )
-      //     : ListView.builder(
-      //         // scrollDirection: Axis.vertical,
-      //         // shrinkWrap: true,
-      //         itemCount: favouritesList.length,
-      //         itemBuilder: (context, index) {
-      //           return GestureDetector(
-      //             onTap: () {
-      //               Navigator.push(
-      //                 context,
-      //                 MaterialPageRoute(
-      //                   builder: (context) => RecipeDetailScreen(
-      //                     recipe: favouritesList[index],
-      //                   ),
-      //                 ),
-      //               );
-      //             },
-      //             child: favouritesList[index],
-      //           );
-      //         },
-      //       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            favouritesList.isEmpty
-                ? const Center(
-                    child: Text(
-                      'There are no favorites yet!',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
-                      ),
-                    ),
-                  )
-                : ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: favouritesList.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => RecipeDetailScreen(
-                          //       meal: favouritesList[index],
-                          //     ),
-                          //   ),
-                          // );
-                        },
-                        child: favouritesList[index],
-                      );
-                    },
-                  ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
+      drawer: const CustomDrawer(),
     );
   }
 }
