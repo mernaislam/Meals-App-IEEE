@@ -29,10 +29,18 @@ class Favourites extends ConsumerWidget {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: meals.length,
-        itemBuilder: (context, index) => MealContainer(meal: meals[index]),
-      ),
+      body: meals.isEmpty
+          ? const Center(
+              child: Text(
+                "You have no favourite meals. Start adding!",
+                style: TextStyle(fontSize: 20, color: Colors.black),
+              ),
+            )
+          : ListView.builder(
+              itemCount: meals.length,
+              itemBuilder: (context, index) =>
+                  MealContainer(meal: meals[index]),
+            ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
       drawer: const CustomDrawer(),
     );
