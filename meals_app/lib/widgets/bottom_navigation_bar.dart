@@ -14,9 +14,17 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: idx,
-      onTap: (value) => setState(() {
-        idx = value;
-      }),
+      onTap: (value) {
+        setState(() {
+          idx = value;
+        });
+        if (value == 1 &&
+            ModalRoute.of(context)!.settings.name != '/favourites') {
+          Navigator.pushReplacementNamed(context, '/favourites');
+        } else if (value == 0 && ModalRoute.of(context)!.settings.name != '/') {
+          Navigator.pushReplacementNamed(context, '/');
+        }
+      },
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: Colors.white,
       selectedItemColor: const Color.fromARGB(255, 248, 154, 88),
