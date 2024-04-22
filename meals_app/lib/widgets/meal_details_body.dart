@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/models/meal.dart';
+import 'package:meals_app/theming/colors.dart';
 
 class MealDetailsBody extends StatelessWidget {
   final Meal meal;
@@ -41,7 +42,7 @@ class MealDetailsBody extends StatelessWidget {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 119, 61, 17),
+              color: AppColors.brown,
             ),
           ),
           const SizedBox(
@@ -63,7 +64,7 @@ class MealDetailsBody extends StatelessWidget {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 119, 61, 17),
+              color: AppColors.brown,
             ),
           ),
           for (var step in meal.steps)
@@ -74,7 +75,7 @@ class MealDetailsBody extends StatelessWidget {
                 '• $step',
                 style: const TextStyle(
                   fontSize: 18,
-                  color: Colors.black,
+                  color: AppColors.black,
                 ),
               ),
             ),

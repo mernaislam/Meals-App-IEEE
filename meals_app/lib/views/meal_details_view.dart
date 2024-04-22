@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meals_app/models/favourites_notifier.dart';
+import 'package:meals_app/providers/favourites_notifier.dart';
 import 'package:meals_app/models/meal.dart';
+import 'package:meals_app/theming/colors.dart';
 import 'package:meals_app/widgets/meal_details_body.dart';
 
 class MealDetailsView extends ConsumerWidget {
   final Meal meal;
 
-  const MealDetailsView({Key? key, required this.meal}) : super(key: key);
+  const MealDetailsView({super.key, required this.meal});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,6 +16,8 @@ class MealDetailsView extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.barColor,
+        foregroundColor: AppColors.white,
         title: Text(meal.title),
         actions: <Widget>[
           IconButton(
@@ -22,7 +25,7 @@ class MealDetailsView extends ConsumerWidget {
               favouritesList.contains(meal)
                   ? Icons.favorite
                   : Icons.favorite_border,
-              color: Colors.red,
+              color: AppColors.favoritesIconColor,
             ),
             onPressed: () {
               if (favouritesList.contains(meal)) {
@@ -34,7 +37,7 @@ class MealDetailsView extends ConsumerWidget {
           ),
         ],
       ),
-      backgroundColor: const Color.fromARGB(255, 176, 173, 173),
+      backgroundColor: AppColors.bodyBackgroundColor,
       body: MealDetailsBody(
         meal: meal,
       ),

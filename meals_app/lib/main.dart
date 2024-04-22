@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meals_app/views/favourites_view.dart';
 import 'package:meals_app/views/home_view.dart';
+// import 'package:meals_app/views/favourites_view.dart';
+// import 'package:meals_app/views/home_view.dart';
 
 void main() {
   runApp(
@@ -18,10 +19,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        '/': (ctx) => HomePage(),
-        '/favourites': (ctx) => Favourites(),
-      },
+      // routes: {
+      //   '/': (ctx) => HomePage(),
+      //   '/favourites': (ctx) => Favourites(),
+      // },
       title: 'Food Recipe',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      //home: const HomePage(),
+      home: const HomeView(),
     );
   }
 }

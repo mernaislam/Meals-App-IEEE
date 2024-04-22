@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/theming/colors.dart';
+import 'package:meals_app/views/filters_view.dart';
+import 'package:meals_app/views/home_view.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -14,7 +17,7 @@ class CustomDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 52, 49, 49),
+              color: AppColors.drawerBackgroundColor,
               image: DecorationImage(
                   image: AssetImage('assets/images/home_image_width.jpg'),
                   fit: BoxFit.cover,
@@ -26,36 +29,47 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(
               Icons.fastfood,
               size: 40,
-              color: Colors.white,
+              color: AppColors.white,
             ),
             title: const Text(
               'Meals',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.white,
                 fontSize: 30,
               ),
             ),
             onTap: () {
               Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomeView(),
+                ),
+              );
             },
           ),
           ListTile(
             leading: const Icon(
               Icons.settings,
               size: 40,
-              color: Colors.white,
+              color: AppColors.white,
             ),
             title: const Text(
               'Filters',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.white,
                 fontSize: 30,
               ),
             ),
             onTap: () {
               Navigator.pop(context);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const FiltersView(),
+                ),
+              );
             },
           ),
         ],

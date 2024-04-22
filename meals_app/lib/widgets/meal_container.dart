@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meals_app/models/favourites_notifier.dart';
+import 'package:meals_app/providers/favourites_notifier.dart';
 import 'package:meals_app/models/meal.dart';
+import 'package:meals_app/theming/colors.dart';
 import 'package:meals_app/views/meal_details_view.dart';
 
 class MealContainer extends ConsumerWidget {
   final Meal meal;
 
-  const MealContainer({Key? key, required this.meal}) : super(key: key);
+  const MealContainer({
+    super.key,
+    required this.meal,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,11 +29,11 @@ class MealContainer extends ConsumerWidget {
         width: MediaQuery.of(context).size.width,
         height: 180,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: AppColors.black,
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.6),
+              color: AppColors.black.withOpacity(0.6),
               offset: const Offset(
                 0.0,
                 10.0,
@@ -40,7 +44,7 @@ class MealContainer extends ConsumerWidget {
           ],
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.35),
+              AppColors.black.withOpacity(0.35),
               BlendMode.multiply,
             ),
             image: NetworkImage(meal.imageUrl),
@@ -75,14 +79,14 @@ class MealContainer extends ConsumerWidget {
                     padding: const EdgeInsets.all(5),
                     margin: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.4),
+                      color: AppColors.black.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Row(
                       children: [
                         const Icon(
                           Icons.work,
-                          color: Colors.yellow,
+                          color: AppColors.yellow,
                           size: 18,
                         ),
                         const SizedBox(width: 7),
@@ -92,7 +96,7 @@ class MealContainer extends ConsumerWidget {
                         const SizedBox(width: 25),
                         const Icon(
                           Icons.schedule,
-                          color: Colors.yellow,
+                          color: AppColors.yellow,
                           size: 18,
                         ),
                         const SizedBox(width: 7),
@@ -107,7 +111,7 @@ class MealContainer extends ConsumerWidget {
                     padding: const EdgeInsets.all(5),
                     margin: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.4),
+                      color: AppColors.black.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Row(
@@ -123,7 +127,7 @@ class MealContainer extends ConsumerWidget {
                                   favouritesList.contains(meal)
                                       ? Icons.favorite
                                       : Icons.favorite_border,
-                                  color: Colors.red,
+                                  color: AppColors.favoritesIconColor,
                                 ),
                                 onPressed: () {
                                   if (favouritesList.contains(meal)) {

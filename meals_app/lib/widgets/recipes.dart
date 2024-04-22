@@ -1,6 +1,6 @@
 import 'package:meals_app/widgets/recipe_card.dart';
 
-List<RecipeCard> recipes = [
+List<RecipeCard> recipes = const [
   RecipeCard(
     title: "Spaghetti Carbonara",
     cookTime: "20 minutes",

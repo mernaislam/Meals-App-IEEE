@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/theming/colors.dart';
 
 class RecipeCard extends StatefulWidget {
   final String title;
@@ -29,11 +30,11 @@ class _RecipeCardState extends State<RecipeCard> {
       width: MediaQuery.of(context).size.width,
       height: 180,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: AppColors.black,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.6),
+            color: AppColors.black.withOpacity(0.6),
             offset: const Offset(
               0.0,
               10.0,
@@ -44,7 +45,7 @@ class _RecipeCardState extends State<RecipeCard> {
         ],
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.35),
+            AppColors.black.withOpacity(0.35),
             BlendMode.multiply,
           ),
           image: NetworkImage(widget.thumbnailUrl),
@@ -78,14 +79,14 @@ class _RecipeCardState extends State<RecipeCard> {
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
+                    color: AppColors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
                     children: [
                       const Icon(
                         Icons.star,
-                        color: Colors.yellow,
+                        color: AppColors.yellow,
                         size: 18,
                       ),
                       const SizedBox(width: 7),
@@ -93,7 +94,7 @@ class _RecipeCardState extends State<RecipeCard> {
                       const SizedBox(width: 25),
                       const Icon(
                         Icons.schedule,
-                        color: Colors.yellow,
+                        color: AppColors.yellow,
                         size: 18,
                       ),
                       const SizedBox(width: 7),
@@ -106,7 +107,7 @@ class _RecipeCardState extends State<RecipeCard> {
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
+                    color: AppColors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(
@@ -122,7 +123,7 @@ class _RecipeCardState extends State<RecipeCard> {
                                 isFavourite
                                     ? Icons.favorite
                                     : Icons.favorite_border,
-                                color: Colors.red,
+                                color: AppColors.favoritesIconColor,
                               ),
                               onPressed: () {
                                 setState(() {
